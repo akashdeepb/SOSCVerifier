@@ -68,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
                 if (connected) {
                     //Check if Input is not empty field
                     if (!code.getText().toString().isEmpty()) {
-                        Request request = new Request(MainActivity.this, code.getText().toString(), lastVerified);
+                        Request request = new Request();
+                        request.verifyRequest(MainActivity.this, code.getText().toString(), lastVerified);
                     } else
                         Toast.makeText(MainActivity.this, "Enter Code", Toast.LENGTH_LONG).show();
                 }

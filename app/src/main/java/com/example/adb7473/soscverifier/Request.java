@@ -18,7 +18,7 @@ import java.util.Map;
 public class Request {
 
     //Constructor for Request Class
-    public Request(final Context ctx, final String codeText, final TextView lastverified){
+    public void verifyRequest(final Context ctx, final String codeText, final TextView lastverified){
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);
 
         String url = "<URL_HERE>";          //URL to send request to
@@ -47,4 +47,5 @@ public class Request {
         requestQueue.add(stringRequest);
 
     }
+
 }
