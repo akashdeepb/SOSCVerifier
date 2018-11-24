@@ -18,7 +18,7 @@ import java.util.Map;
 public class Request {
 
     //Constructor for Request Class
-    public Request(final Context ctx, final String code, final TextView _lastverified){
+    public Request(final Context ctx, final String code, final TextView lastverified){
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);
 
         String url = "<URL_HERE>";          //URL to send request to
@@ -27,13 +27,13 @@ public class Request {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        _lastverified.setText(response);
+                        lastverified.setText(response);
                         Toast.makeText(ctx,response,Toast.LENGTH_LONG).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                _lastverified.setText("Error");
+                lastverified.setText("Error");
             }
         }){
             @Override
