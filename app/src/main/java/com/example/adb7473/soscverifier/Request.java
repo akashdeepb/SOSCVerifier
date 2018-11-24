@@ -18,7 +18,7 @@ import java.util.Map;
 public class Request {
 
     //Constructor for Request Class
-    public Request(final Context ctx, final String code, final TextView lastverified){
+    public Request(final Context ctx, final String codeText, final TextView lastverified){
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);
 
         String url = "<URL_HERE>";          //URL to send request to
@@ -39,7 +39,7 @@ public class Request {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("code",code);
+                params.put("code",codeText);
                 params.put("veri_by", Build.ID);
                 return params;
             }
