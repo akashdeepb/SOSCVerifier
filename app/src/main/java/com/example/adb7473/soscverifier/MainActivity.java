@@ -50,7 +50,13 @@ public class MainActivity extends AppCompatActivity {
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Request request = new Request(MainActivity.this,code.getText().toString(),lastVerified);
+
+                //Check if Input is not empty field
+                if(!code.getText().toString().isEmpty()) {
+                    Request request = new Request(MainActivity.this, code.getText().toString(), lastVerified);
+                }
+                else
+                    Toast.makeText(MainActivity.this,"Enter Code",Toast.LENGTH_LONG).show();
             }
         });
 
