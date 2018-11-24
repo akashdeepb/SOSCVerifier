@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">SOSCVerifier</string>
+    <string name="scan_btn_text">SCAN</string>
+    <string name="code_hint_text">Code</string>
+    <string name="submit_btn_text">SUBMIT</string>
+    <string name="last_veri_text">Last Verified : </string>
+    <string name="NULL_text">NULL</string>
 </resources>
