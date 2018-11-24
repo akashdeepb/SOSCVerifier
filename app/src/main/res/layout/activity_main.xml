@@ -14,11 +14,8 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:fontFamily="monospace"/>
-    
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="40dp" />
+        android:fontFamily="monospace"
+        android:paddingBottom="40dp"/>
 
     <Button
         android:layout_width="120dp"
@@ -29,14 +26,12 @@
         android:id="@+id/scan_btn"
         android:textColor="@color/colorAccent"
         android:background="@drawable/button_rounded_corners_border"/>
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="50dp" />
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/code_hint_text"
         android:textAlignment="center"
+        android:paddingTop="50dp"
         android:id="@+id/code_text"
         android:maxLines="1"/>
     <Button
@@ -46,12 +41,10 @@
         android:layout_gravity="center"
         android:id="@+id/submit_btn"/>
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="20dp" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="20dp"
         android:text="@string/last_veri_text"/>
     <TextView
         android:layout_width="match_parent"
