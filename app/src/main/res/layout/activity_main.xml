@@ -37,7 +37,8 @@
         android:layout_height="wrap_content"
         android:hint="Code"
         android:textAlignment="center"
-        android:id="@+id/code_text"/>
+        android:id="@+id/code_text"
+        android:maxLines="1"/>
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
