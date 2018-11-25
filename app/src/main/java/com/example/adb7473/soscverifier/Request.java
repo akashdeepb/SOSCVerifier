@@ -21,7 +21,7 @@ public class Request {
     public void verifyRequest(final Context ctx, final String codeText, final TextView lastverified){
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);
 
-        String url = "<URL_HERE>";          //URL to send request to
+        String url = "https://c377416.000webhostapp.com/sosc_verify.php";          //URL to send request to
 
         StringRequest stringRequest = new StringRequest(com.android.volley.Request.Method.POST, url,
                 new Response.Listener<String>() {
@@ -40,7 +40,7 @@ public class Request {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
                 params.put("code",codeText);
-                params.put("veri_by", Build.ID);
+                params.put("veri_by", Build.DEVICE);
                 return params;
             }
         };
