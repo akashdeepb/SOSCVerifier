@@ -14,6 +14,7 @@
         android:textAlignment="center"
         android:textSize="30dp"
         android:textStyle="bold"
+        android:id="@+id/main_string"
         android:fontFamily="monospace"
         android:paddingBottom="40dp"/>
 

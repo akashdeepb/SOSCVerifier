@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+
 public class MainActivity extends AppCompatActivity {
     Button btnScan, btnSubmit;
     EditText code;
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result != null) {
+        if (result!=null) {
             if (result.getContents() == null) {
                 Toast.makeText(this, R.string.scan_cancel_text, Toast.LENGTH_LONG).show();
             } else {
