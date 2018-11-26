@@ -5,4 +5,7 @@
     <string name="submit_btn_text">SUBMIT</string>
     <string name="last_veri_text">Last Verified : </string>
     <string name="NULL_text">NULL</string>
+    <string name="enter_code_text">Enter Code"</string>
+    <string name="internet_check_text">Check Internet Connection</string>
+    <string name="scan_cancel_text">Scan Cancelled</string>
 </resources>

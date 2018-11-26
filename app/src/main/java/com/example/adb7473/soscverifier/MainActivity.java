@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
                     if (!code.getText().toString().isEmpty()) {
                         request.verifyRequest(MainActivity.this, code.getText().toString());
                     } else
-                        Toast.makeText(MainActivity.this, "Enter Code", Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivity.this, R.string.enter_code_text, Toast.LENGTH_LONG).show();
                 } else
-                    Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, R.string.internet_check_text, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             if (result.getContents() == null) {
-                Toast.makeText(this, "Scan Cancelled", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, R.string.scan_cancel_text, Toast.LENGTH_LONG).show();
             } else {
                 //Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
                 code.setText(result.getContents());
