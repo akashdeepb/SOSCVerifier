@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:hint="@string/code_hint_text"
         android:textAlignment="center"
-        android:paddingTop="50dp"
+        android:layout_marginTop="50dp"
         android:id="@+id/code_text"
         android:maxLines="1"/>
     <Button

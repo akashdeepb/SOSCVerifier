@@ -16,9 +16,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Request {
+    interface Listener{
+        void changeField(String responseText);
+    }
 
-    //Constructor for Request Class
-    public void verifyRequest(final Context ctx, final String codeText, final TextView lastverified){
+    Listener listener;
+
+    public void setListener(Listener listener) {
+        this.listener = listener;
+    }
+
+    public void verifyRequest(final Context ctx, final String codeText){
         RequestQueue requestQueue = Volley.newRequestQueue(ctx);
 
         String url = "https://c377416.000webhostapp.com/sosc_verify.php";          //URL to send request to
@@ -27,13 +35,12 @@ public class Request {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        lastverified.setText(response);
-                        Toast.makeText(ctx,response,Toast.LENGTH_LONG).show();
+                        listener.changeField(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                lastverified.setText("Error");
+                listener.changeField("Error");
             }
         }){
             @Override
