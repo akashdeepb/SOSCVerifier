@@ -10,13 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.r0adkll.slidr.Slidr;
+
 public class MainActivity extends AppCompatActivity{
-    FloatingActionButton btnScan;
     Button btnSubmit;
+    ImageButton btnClear;
     EditText code;
     TextView lastVerified;
     final Request request = new Request();
@@ -27,13 +30,13 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         final Activity activity = this;
 
+        Slidr.attach(this);
 
         //Hooking Elements
-        btnScan = (FloatingActionButton) findViewById(R.id.btn_scan);
         code = (EditText) findViewById(R.id.code_text);
         lastVerified = (TextView) findViewById(R.id.lastVerifiedText);
         btnSubmit=(Button)findViewById(R.id.submit_btn);
-
+        btnClear = (ImageButton)findViewById(R.id.btn_clear);
 
         request.setListener(new Request.Listener() {
             @Override
@@ -46,11 +49,19 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        //Clear Button OnClick
+        btnClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                code.setText("");
+            }
+        });
 
         //Submit Button OnClick
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 //Check if Network Connected
                 boolean connected = false;
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -70,14 +81,6 @@ public class MainActivity extends AppCompatActivity{
                         Toast.makeText(MainActivity.this, R.string.enter_code_text, Toast.LENGTH_LONG).show();
                 } else
                     Toast.makeText(MainActivity.this, R.string.internet_check_text, Toast.LENGTH_LONG).show();
-            }
-        });
-
-        btnScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i= new Intent(MainActivity.this,QRScanner.class);
-                startActivity(i);
             }
         });
 

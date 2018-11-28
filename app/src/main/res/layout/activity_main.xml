@@ -14,10 +14,11 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="52dp"
+            android:layout_height="55dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="92dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/rounded_corners_border"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
@@ -26,10 +27,13 @@
 
             <EditText
                 android:id="@+id/code_text"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="3dp"
                 android:layout_width="300dp"
-                android:layout_height="48dp"
+                android:layout_height="45dp"
                 android:background="@drawable/rounded_corners_border"
                 android:backgroundTint="#FFFFFF"
+                android:layout_gravity="center"
                 android:hint="@string/code_hint_text"
                 android:inputType="text"
                 android:maxLines="1"
@@ -39,7 +43,8 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
-                android:background="@drawable/ic_cancel_gray_24dp" />
+                android:background="@drawable/ic_cancel_gray_24dp"
+                android:id="@+id/btn_clear"/>
         </LinearLayout>
 
         <TextView
@@ -62,26 +67,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="232dp"
             android:text="@string/NULL_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent" />
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/btn_scan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            app:layout_constraintBottom_toTopOf="@+id/textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:srcCompat="@drawable/ic_photo_camera_black_24dp" />
 
         <Button
             android:id="@+id/submit_btn"
@@ -89,14 +80,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/submit_btn_text"
             android:background="@drawable/rounded_corners_border"
-            app:layout_constraintBottom_toTopOf="@+id/btn_scan"
+            android:text="@string/submit_btn_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            app:layout_constraintVertical_bias="0.192" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <EditText
             android:id="@+id/editText"

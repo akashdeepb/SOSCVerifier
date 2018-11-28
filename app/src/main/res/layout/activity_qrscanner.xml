@@ -5,9 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".QRScanner">
+
     <com.dlazaro66.qrcodereaderview.QRCodeReaderView
+        android:id="@+id/qr_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/qr_view"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <ImageButton
+        android:id="@+id/button"
+        android:layout_width="48dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="18dp"
+        android:paddingBottom="18dp"
+        android:background="@drawable/ic_arrow_forward_black_24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.017" />
 
 </android.support.constraint.ConstraintLayout>

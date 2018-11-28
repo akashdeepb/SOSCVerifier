@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/LightTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".QRScanner"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".QRScanner"></activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
