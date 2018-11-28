@@ -3,11 +3,9 @@ package com.example.adb7473.soscverifier;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.PointF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
@@ -16,10 +14,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
-
-public class MainActivity extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
-    FloatingActionButton btnSubmit;
+public class MainActivity extends AppCompatActivity{
+    FloatingActionButton btnScan;
+    Button btnSubmit;
     EditText code;
     TextView lastVerified;
     final Request request = new Request();
@@ -28,16 +25,14 @@ public class MainActivity extends AppCompatActivity implements QRCodeReaderView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         final Activity activity = this;
 
-        //QR Code View Declaration
-        QRCodeReaderView qrCodeReaderView;
 
         //Hooking Elements
-        btnSubmit = (FloatingActionButton) findViewById(R.id.submit_btn);
+        btnScan = (FloatingActionButton) findViewById(R.id.btn_scan);
         code = (EditText) findViewById(R.id.code_text);
         lastVerified = (TextView) findViewById(R.id.lastVerifiedText);
+        btnSubmit=(Button)findViewById(R.id.submit_btn);
 
 
         request.setListener(new Request.Listener() {
@@ -51,19 +46,11 @@ public class MainActivity extends AppCompatActivity implements QRCodeReaderView.
             }
         });
 
-        qrCodeReaderView = (QRCodeReaderView)findViewById(R.id.qr_view);
-        qrCodeReaderView.setOnQRCodeReadListener(this);
-        qrCodeReaderView.setBackCamera();
-        qrCodeReaderView.setAutofocusInterval(2000L);
-
-
-
 
         //Submit Button OnClick
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 //Check if Network Connected
                 boolean connected = false;
                 ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -86,12 +73,14 @@ public class MainActivity extends AppCompatActivity implements QRCodeReaderView.
             }
         });
 
+        btnScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i= new Intent(MainActivity.this,QRScanner.class);
+                startActivity(i);
+            }
+        });
+
     }
 
-
-    @Override
-    public void onQRCodeRead(String text, PointF[] points) {
-        code.setText(text);
-        request.verifyRequest(MainActivity.this, code.getText().toString());
-    }
 }
