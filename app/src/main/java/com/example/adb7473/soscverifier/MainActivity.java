@@ -3,25 +3,26 @@ package com.example.adb7473.soscverifier;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.support.design.widget.FloatingActionButton;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.zxing.integration.android.IntentIntegrator;
-import com.google.zxing.integration.android.IntentResult;
+import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
-
-public class MainActivity extends AppCompatActivity {
-    Button btnScan, btnSubmit;
+public class MainActivity extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
+    FloatingActionButton btnSubmit;
     EditText code;
     TextView lastVerified;
+    final Request request = new Request();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,27 +31,15 @@ public class MainActivity extends AppCompatActivity {
 
         final Activity activity = this;
 
+        //QR Code View Declaration
+        QRCodeReaderView qrCodeReaderView;
+
         //Hooking Elements
-        btnScan = (Button) findViewById(R.id.scan_btn);
-        btnSubmit = (Button) findViewById(R.id.submit_btn);
+        btnSubmit = (FloatingActionButton) findViewById(R.id.submit_btn);
         code = (EditText) findViewById(R.id.code_text);
         lastVerified = (TextView) findViewById(R.id.lastVerifiedText);
 
-        //QRCode Scanner
-        btnScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                IntentIntegrator integrator = new IntentIntegrator(activity);
-                integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-                integrator.setPrompt("Scan  Code");
-                integrator.setCameraId(0);
-                integrator.setBeepEnabled(true);
-                integrator.setBarcodeImageEnabled(false);
-                integrator.initiateScan();
-            }
-        });
 
-        final Request request = new Request();
         request.setListener(new Request.Listener() {
             @Override
             public void changeField(String responseText) {
@@ -61,6 +50,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        qrCodeReaderView = (QRCodeReaderView)findViewById(R.id.qr_view);
+        qrCodeReaderView.setOnQRCodeReadListener(this);
+        qrCodeReaderView.setBackCamera();
+        qrCodeReaderView.setAutofocusInterval(2000L);
+
+
+
 
         //Submit Button OnClick
         btnSubmit.setOnClickListener(new View.OnClickListener() {
@@ -91,18 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
-        if (result!=null) {
-            if (result.getContents() == null) {
-                Toast.makeText(this, R.string.scan_cancel_text, Toast.LENGTH_LONG).show();
-            } else {
-                //Toast.makeText(this,result.getContents(),Toast.LENGTH_LONG).show();
-                code.setText(result.getContents());
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
+    public void onQRCodeRead(String text, PointF[] points) {
+        code.setText(text);
+        request.verifyRequest(MainActivity.this, code.getText().toString());
     }
 }
