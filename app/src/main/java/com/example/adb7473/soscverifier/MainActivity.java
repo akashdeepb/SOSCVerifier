@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
 import android.view.View;
 import android.support.design.widget.FloatingActionButton;
 import android.widget.Button;
@@ -15,14 +18,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.r0adkll.slidr.Slidr;
+public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+    private static final int SWIPE_MIN_DISTANCE = 120;
+    private static final int SWIPE_MAX_OFF_PATH = 250;
+    private static final int SWIPE_THRESHOLD_VELOCITY = 100;
 
-public class MainActivity extends AppCompatActivity{
     Button btnSubmit;
     ImageButton btnClear;
     EditText code;
     TextView lastVerified;
     final Request request = new Request();
+    private GestureDetectorCompat detector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +36,7 @@ public class MainActivity extends AppCompatActivity{
         setContentView(R.layout.activity_main);
         final Activity activity = this;
 
-        Slidr.attach(this);
-
+        detector = new GestureDetectorCompat(this,this);
         //Hooking Elements
         code = (EditText) findViewById(R.id.code_text);
         lastVerified = (TextView) findViewById(R.id.lastVerifiedText);
@@ -86,4 +91,51 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public boolean onDown(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        try{
+            if (Math.abs(motionEvent.getY()-motionEvent1.getY())> SWIPE_MAX_OFF_PATH)
+                return false;
+
+            //Right to Left Swipe
+            if(motionEvent.getX() - motionEvent1.getX()> SWIPE_MIN_DISTANCE && Math.abs(v) > SWIPE_THRESHOLD_VELOCITY) {
+                Intent i = new Intent(this,QRScanner.class);
+                startActivity(i);
+            }
+        }catch (Exception e){
+
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        detector.onTouchEvent(event);
+        return super.onTouchEvent(event);
+    }
 }
