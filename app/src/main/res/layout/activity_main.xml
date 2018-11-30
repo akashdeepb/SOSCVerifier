@@ -20,6 +20,7 @@
             android:layout_marginEnd="8dp"
             android:background="@drawable/rounded_corners_border"
             android:orientation="horizontal"
+            android:backgroundTint="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,24 +28,22 @@
 
             <EditText
                 android:id="@+id/code_text"
-                android:layout_marginTop="3dp"
-                android:layout_marginLeft="3dp"
                 android:layout_width="300dp"
                 android:layout_height="45dp"
-                android:background="@drawable/rounded_corners_border"
-                android:backgroundTint="#FFFFFF"
                 android:layout_gravity="center"
+                android:layout_marginLeft="8dp"
+                android:backgroundTint="#FFFFFF"
                 android:hint="@string/code_hint_text"
                 android:inputType="text"
                 android:maxLines="1"
                 android:textAlignment="center" />
 
             <ImageButton
+                android:id="@+id/btn_clear"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginTop="4dp"
-                android:background="@drawable/ic_cancel_gray_24dp"
-                android:id="@+id/btn_clear"/>
+                android:background="@drawable/ic_cancel_gray_24dp" />
         </LinearLayout>
 
         <TextView
@@ -56,6 +55,7 @@
             android:layout_marginBottom="8dp"
             android:paddingTop="20dp"
             android:text="@string/last_veri_text"
+            android:textColor="@android:color/white"
             app:layout_constraintBottom_toTopOf="@+id/lastVerifiedText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -68,6 +68,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="232dp"
+            android:textColor="@android:color/white"
             android:text="@string/NULL_text"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -80,13 +81,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/rounded_corners_border"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/rounded_corners_border_orange"
             android:text="@string/submit_btn_text"
+            android:textColor="#f44505"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
-        <EditText
+        <TextView
             android:id="@+id/editText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -95,9 +98,9 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:ems="10"
-            android:inputType="textPersonName"
-            android:text="SOSCVerifier"
+            android:text="@string/app_name"
             android:textStyle="bold"
+            android:textColor="#FFFFFF"
             android:textAlignment="center"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout"
             app:layout_constraintEnd_toEndOf="parent"
