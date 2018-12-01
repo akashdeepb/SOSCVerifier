@@ -40,8 +40,8 @@
 
             <ImageButton
                 android:id="@+id/btn_clear"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="4dp"
                 android:background="@drawable/ic_cancel_gray_24dp" />
         </LinearLayout>

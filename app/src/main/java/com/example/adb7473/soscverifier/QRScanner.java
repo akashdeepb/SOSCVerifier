@@ -7,7 +7,13 @@ import android.os.Bundle;
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 import com.r0adkll.slidr.Slidr;
 
+import android.view.View;
+import android.widget.ImageButton;
+
 public class QRScanner extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
+
+    ImageButton focusButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -16,13 +22,22 @@ public class QRScanner extends AppCompatActivity implements QRCodeReaderView.OnQ
 
         Slidr.attach(this);
 
+        focusButton = (ImageButton)findViewById(R.id.btn_focus);
+
         //QR Code View Declaration
-        QRCodeReaderView qrCodeReaderView;
+        final QRCodeReaderView qrCodeReaderView;
 
         qrCodeReaderView = (QRCodeReaderView)findViewById(R.id.qr_view);
         qrCodeReaderView.setOnQRCodeReadListener(this);
         qrCodeReaderView.setBackCamera();
-        qrCodeReaderView.setAutofocusInterval(2000L);
+        qrCodeReaderView.setAutofocusInterval(4000L);
+
+        focusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                qrCodeReaderView.forceAutoFocus();
+            }
+        });
     }
 
     @Override
