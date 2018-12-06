@@ -17,10 +17,10 @@ import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.widget.Toolbar;
 
-import org.w3c.dom.Text;
 
-public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
+public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     private static final int SWIPE_MIN_DISTANCE = 120;
     private static final int SWIPE_MAX_OFF_PATH = 250;
     private static final int SWIPE_THRESHOLD_VELOCITY = 100;
@@ -41,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         setContentView(R.layout.activity_main);
         final Activity activity = this;
 
+        Toolbar myToolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(myToolbar);
+
         detector = new GestureDetectorCompat(this,this);
         //Hooking Elements
         code = (EditText) findViewById(R.id.code_text);
@@ -55,11 +58,11 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             @Override
             public void changeField(String responseText) {
                 lastVerified.setText(responseText);
+                lastVerified.setVisibility(View.VISIBLE);
+                lastHead.setVisibility(View.VISIBLE);
                 progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, responseText, Toast.LENGTH_LONG).show();
                 if (!responseText.contains("Unregistered") && !responseText.contains("Error")) {
-                    lastVerified.setVisibility(View.VISIBLE);
-                    lastHead.setVisibility(View.VISIBLE);
                     code.setText("");
                 }
             }
