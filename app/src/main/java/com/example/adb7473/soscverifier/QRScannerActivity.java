@@ -10,9 +10,12 @@ import com.r0adkll.slidr.Slidr;
 import android.view.View;
 import android.widget.ImageButton;
 
-public class QRScanner extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QRScannerActivity extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     ImageButton focusButton;
+
+    public static QRScanListener qrScanListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,7 @@ public class QRScanner extends AppCompatActivity implements QRCodeReaderView.OnQ
 
     @Override
     public void onQRCodeRead(String text, PointF[] points) {
-        //code.setText(text);
-        //request.verifyRequest(MainActivity.this, code.getText().toString());
-        Intent i= new Intent(this,MainActivity.class);
-        startActivity(i);
+        qrScanListener.onScanned(text);
+        finish();
     }
 }

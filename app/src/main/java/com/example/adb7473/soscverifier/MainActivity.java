@@ -1,6 +1,7 @@
 package com.example.adb7473.soscverifier;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -11,12 +12,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
-import android.support.design.widget.FloatingActionButton;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener {
     private static final int SWIPE_MIN_DISTANCE = 120;
@@ -26,9 +28,12 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     Button btnSubmit;
     ImageButton btnClear;
     EditText code;
-    TextView lastVerified;
+    TextView lastVerified,lastHead;
     final Request request = new Request();
     private GestureDetectorCompat detector;
+    ProgressDialog progressDialog;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +47,32 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         lastVerified = (TextView) findViewById(R.id.lastVerifiedText);
         btnSubmit=(Button)findViewById(R.id.submit_btn);
         btnClear = (ImageButton)findViewById(R.id.btn_clear);
+        lastHead = (TextView)findViewById(R.id.LastHeadText);
 
-        request.setListener(new Request.Listener() {
+
+
+        request.setNetworkResponseListener(new Request.NetworkResponseListener() {
             @Override
             public void changeField(String responseText) {
                 lastVerified.setText(responseText);
+                progressDialog.dismiss();
                 Toast.makeText(MainActivity.this, responseText, Toast.LENGTH_LONG).show();
                 if (!responseText.contains("Unregistered") && !responseText.contains("Error")) {
+                    lastVerified.setVisibility(View.VISIBLE);
+                    lastHead.setVisibility(View.VISIBLE);
                     code.setText("");
                 }
             }
         });
+
+        QRScanListener listener = new QRScanListener() {
+            @Override
+            public void onScanned(String qrCode) {
+                code.setText(qrCode);
+            }
+        };
+
+        QRScannerActivity.qrScanListener = listener;
 
         //Clear Button OnClick
         btnClear.setOnClickListener(new View.OnClickListener() {
@@ -81,6 +101,13 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 if (connected) {
                     //Check if Input is not empty field
                     if (!code.getText().toString().isEmpty()) {
+                        progressDialog = new ProgressDialog(
+                                MainActivity.this
+                        );
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.setCancelable(false);
+                        progressDialog.setTitle("Processing Request...");
+                        progressDialog.show();
                         request.verifyRequest(MainActivity.this, code.getText().toString());
                     } else
                         Toast.makeText(MainActivity.this, R.string.enter_code_text, Toast.LENGTH_LONG).show();
@@ -124,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
 
             //Right to Left Swipe
             if(motionEvent.getX() - motionEvent1.getX()> SWIPE_MIN_DISTANCE && Math.abs(v) > SWIPE_THRESHOLD_VELOCITY) {
-                Intent i = new Intent(this,QRScanner.class);
+                Intent i = new Intent(this,QRScannerActivity.class);
                 startActivity(i);
             }
         }catch (Exception e){
@@ -138,4 +165,5 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         detector.onTouchEvent(event);
         return super.onTouchEvent(event);
     }
+
 }

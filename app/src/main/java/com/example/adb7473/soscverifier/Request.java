@@ -2,8 +2,6 @@ package com.example.adb7473.soscverifier;
 
 import android.content.Context;
 import android.os.Build;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
@@ -16,14 +14,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Request {
-    interface Listener{
+    interface NetworkResponseListener {
         void changeField(String responseText);
     }
 
-    Listener listener;
+    NetworkResponseListener networkResponseListener;
 
-    public void setListener(Listener listener) {
-        this.listener = listener;
+    public void setNetworkResponseListener(NetworkResponseListener networkResponseListener) {
+        this.networkResponseListener = networkResponseListener;
     }
 
     public void verifyRequest(final Context ctx, final String codeText){
@@ -35,12 +33,12 @@ public class Request {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        listener.changeField(response);
+                        networkResponseListener.changeField(response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.changeField("Error");
+                networkResponseListener.changeField("Error");
             }
         }){
             @Override
